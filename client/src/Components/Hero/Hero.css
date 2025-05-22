@@ -1,0 +1,9 @@
+.hero{
+    background: url("https://images.pexels.com/photos/9454915/pexels-photo-9454915.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: none;
+  
+}
