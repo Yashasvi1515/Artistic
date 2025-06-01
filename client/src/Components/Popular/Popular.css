@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    height:90vh;
+    margin-bottom: 100px;
 }
 .popular h1{
     font-size: 50px;
@@ -17,10 +17,28 @@
     background: black;
 }
 .popular-item{
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     flex-wrap: wrap;
+}
+.popular {
+  position: relative; /* So absolutely positioned children are relative to this */
+  overflow: hidden; /* Optional: hides any image part going further right than viewport */
+}
+
+.ball-wrapper2 {
+  position: absolute;
+  top: 50px;     /* Adjust as needed */   /* Push half of the image outside */
+  left: 0px;
+  z-index: 5;
+  pointer-events: none; /* optional: allows clicks through the image */
+}
+
+.ball-half-visible {
+  width: 200px;    /* Adjust based on how much you want visible */
+  height: auto;
+   transition: transform 0.1s linear;
 }

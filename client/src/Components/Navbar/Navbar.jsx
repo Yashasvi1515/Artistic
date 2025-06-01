@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Navbar.css';
 import p1 from '../Assets/p1.jpg';
+import logo from '../Assets/logo.png';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
@@ -16,7 +17,7 @@ const Navbar = () => {
                 width: "50px",
     height: "50px",
     borderradius: "10px"
-    }} src={p1} alt="" />
+    }} src={logo} alt="" />
         </div>
      <ul className="nav-menu">
       
@@ -27,7 +28,7 @@ const Navbar = () => {
       <li onClick={()=>{setMenu("handmade")}}><Link style={{textDecoration:'none'}} to='/handmade'> Handmade</Link> {menu==="handmade"?<hr/>:<></>}</li>
      </ul>
      <div className="nav-login-cart">
-        <Link to='/login'><button>Login</button></Link>
+        {localStorage.getItem('auth-token')?<button onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>: <Link to='/login'><button>Login</button></Link>}
         <Link to='/cart'><img 
         style={{ 
                 width: "60px",

@@ -24,3 +24,20 @@
     gap: 30px;
     
 }
+.new-collections {
+  position: relative; /* So absolutely positioned children are relative to this */
+  overflow: hidden; /* Optional: hides any image part going further right than viewport */
+}
+
+.ball-wrapper {
+  position: absolute;
+  top: 50px;       /* Adjust as needed */
+  right: -90px;   /* Push half of the image outside */
+  z-index: 5;
+  pointer-events: none; /* optional: allows clicks through the image */
+}
+
+.ball-half-visible {
+  width: 200px;    /* Adjust based on how much you want visible */
+  height: auto;
+}

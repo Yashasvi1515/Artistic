@@ -1,3 +1,9 @@
+.shop-category{
+    background: url("https://png.pngtree.com/thumb_back/fh260/background/20231030/pngtree-abstract-artwork-lilac-pastel-watercolor-texture-background-in-purple-hues-image_13786200.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .shopcategory-banner{
     display: block;
     margin: 30px auto;
@@ -5,13 +11,14 @@
 }
 .shopcategory-indexSort{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 170px;
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 30px;
 }
 .shopcategory-sort{
-    padding: 10px 20px;
-    border-radius: 40px;
+    width: 100px;
+    padding: 10px 10px;
+    border-radius: 20px;
     border: 1px solid black;
 }
 
@@ -19,21 +26,10 @@
    font-weight: 600; 
 } 
 .shopcategory-products{
-    margin:20px 170px;
+    margin-left:200px;
+    margin-top: -20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 80px;
 }
-.shopcategory-loadmore{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 150px auto;
-    width: 233px;
-    height:69px;
-    border-radius: 75px;
-    background: black;
-    color: burlywood;
-    font-size: 20px;
-    font-weight: 500;
-}
+

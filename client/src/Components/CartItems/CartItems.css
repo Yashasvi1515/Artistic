@@ -1,0 +1,34 @@
+.cartitems-format-main{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
+}
+.carticon-product{
+    width: 100px;
+}
+.cartitems-format{
+   display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
+}
+.cartitems-quantity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 60px;
+    height: 30px;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #DDEB9D;
+  color: #A0C878;
+}

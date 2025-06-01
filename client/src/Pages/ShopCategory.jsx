@@ -1,37 +1,50 @@
-import React,{ useContext} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './CSS/ShopCategory.css';
 import { ShopContext } from '../Context/ShopContext';
-import dropdownicon from '../Components/Assets/p1.jpg';
 import Item from '../Components/Item/Item';
 
-
 const ShopCategory = (props) => {
-    const {all_product} = useContext(ShopContext);
+  const { all_product } = useContext(ShopContext);
+  const [acrylicCollection, setAcrylicCollection] = useState([]);
+  const [showNewCollection, setShowNewCollection] = useState(false);
+
+  useEffect(() => {
+    if (showNewCollection) {
+      fetch(`http://localhost:4000/newcollection/${props.category.toLowerCase()}`)
+        .then((response) => response.json())
+        .then((data) => setAcrylicCollection(data))
+        .catch((error) => console.error("Error fetching acrylic collection:", error));
+    }
+  }, [showNewCollection, props.category]);
+
+  const displayedProducts = showNewCollection
+    ? acrylicCollection.filter(item => item.category === props.category)
+    : all_product.filter(item => item.category === props.category);
+
   return (
     <div className='shop-category'>
-     <img className='shopcategory-banner' src={props.banner} alt="" />
-     <div className="shopcategory-indexSort">
-        <p>
-            <span>Showing 1-12</span>out of 36 products
-        </p>
+      <div className="shopcategory-indexSort">
         <div className="shopcategory-sort">
-            Sort by <img src={dropdownicon} alt="" />
+          Sort by 
         </div>
-     </div>
-     <div className="shopcategory-products">
-        {all_product.map((item,i)=>{
-            if(item.category === props.category){
-                return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price}/>;
-            }else{
-            return null;
-               
-        }
-        })}
-     </div>
-     <div className="shopcategory-loadmore">
-        Explore More
-     </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={showNewCollection}
+            onChange={() => setShowNewCollection(!showNewCollection)}
+          /> New Collection
+        </label>
+        <span style={{ marginLeft: "1rem", fontWeight: "bold" }}>
+          {showNewCollection ? "Showing: New Collection" : "Showing: All Products"}
+        </span>
+      </div>
+      <div className="shopcategory-products">
+        {displayedProducts.map((item, i) => (
+          <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+        ))}
+      </div>
     </div>
   );
-}
+};
+
 export default ShopCategory;

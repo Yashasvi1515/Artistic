@@ -1,21 +1,18 @@
 import React from "react";
 import './ProductDisplay.css';
-import star_icon from '../Assets/p1.jpg';
-import star_dull_icon from '../Assets/p1.jpg';
+//import star_icon from '../Assets/p1.jpg';
+//import star_dull_icon from '../Assets/p1.jpg';
 import { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
+import { FaStar, FaRegStar, FaStarHalfAlt } from 'react-icons/fa';
+
 const ProductDisplay = ({product}) => {
     const{addToCart}=useContext(ShopContext);
 
     return (
         <div className="productdisplay">
             <div className="productdisplay-left">
-                <div className="productdisplay-img-list">
-                <img src={product.image} alt="" />
-                <img src={product.image} alt="" />
-                <img src={product.image} alt="" />
-                <img src={product.image} alt="" />
-                </div>
+              
                 <div className="productdisplay-img">
                     <img className="productdisplay-main-img" src={product.image} alt="" />  
                     </div>
@@ -24,27 +21,30 @@ const ProductDisplay = ({product}) => {
             <div className="productdisplay-right">
                 <h1>{product.name}</h1>
                 <div className="productdisplay-right-star">
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_dull_icon} alt="" />
-                    <p>122</p>
+                   <div style={{ color: '#FFD700', fontSize: '24px' }}>
+      <FaStar />
+      <FaStar />
+      <FaStar />
+      <FaStarHalfAlt />
+      <FaRegStar />
+    </div>
+                    <p>Reviews:122</p>
                 </div>
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-old">
-                        ${product.old_price}
+                       Old price: ${product.old_price}
                     </div>
                     
                     <div className="productdisplay-right-price-new">
-                        ${product.new_price}
+                      New Price:  ${product.new_price}
                     </div>
 
                 </div>
                 <div className="productdisplay-right-description">
-                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut quam minima est, expedita, modi nostrum dignissimos, labore soluta provident ipsam id hic doloremque sed ratione itaque fugiat esse. Exercitationem, reiciendis. 
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, sequi id vel eveniet voluptatum at sit natus laboriosam similique cum atque, repellat voluptates architecto? Nihil qui eligendi explicabo excepturi deserunt ad cupiditate et sit adipisci beatae magni nam, atque, commodi esse omnis consequatur vel suscipit natus quos. Pariatur, assumenda molestiae temporibus commodi aspernatur excepturi quia esse asperiores sapiente officia hic, reprehenderit repellendus aliquam porro suscipit beatae. Voluptate laudantium excepturi voluptatem id atque obcaecati exercitationem placeat laborum harum beatae ducimus recusandae aliquam asperiores veritatis omnis, quisquam et nemo minus fuga incidunt dolorem saepe, velit quos? Fugit nobis ad nisi nulla iure.
                 </div>
-                <button onClick={()=>addToCart(product.id)}>Add to cart</button>
+                
+                <button className="add-to-cart-btn" onClick={()=>addToCart(product.id)}>Add to cart</button>
             </div>
         </div>
     );

@@ -1,55 +1,74 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
-
-import all_product from "../Components/Assets/all_product";
-import axios from "axios";
+import React, {useEffect, createContext, useState} from "react";
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
   let cart = {};
-  for (let i = 1; i <= all_product.length; i++) {
+  for (let i = 1; i <= 300+1; i++) {
     cart[i] = 0;
   }
   return cart;
 };
 
 const ShopContextProvider = ({ children }) => {
+  const [all_product,setAll_Product]=useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
-  // ✅ Sync updated cart to server
-  const syncCartToServer = async (items) => {
-    try {
-      await axios.post("http://localhost:4000/cart", { items }, { withCredentials: true });
-    } catch (err) {
-      console.error("Failed to sync cart", err);
-    }
-  };
+  useEffect(()=>{
+fetch('http://localhost:4000/allproducts')
+.then((response)=>response.json())
+.then((data)=>setAll_Product(data))
 
-  const fetchCartFromEmail = useCallback(async (email) => {
-  try {
-    const res = await axios.get(`http://localhost:4000/cart/${email}`, { withCredentials: true });
-    if (res.data && res.data.items) {
-      const items = Object.fromEntries(
-        Object.entries(res.data.items).map(([id, qty]) => [parseInt(id), qty])
-      );
-      setCartItems(items);
-    }
-  } catch (err) {
-    console.error("Failed to fetch cart", err);
-  }
-}, []);
+if(localStorage.getItem('auth-token')){
+  fetch('http://localhost:4000/getcart',{
+     method:'POST',
+        headers:{
+          Accept:'application/form-data',
+          'auth-token':`${localStorage.getItem('auth-token')}`,
+          'content-Type':'application/json',
 
-  // ✅ Re-sync on cart change
-  useEffect(() => {
-    syncCartToServer(cartItems);
-  }, [cartItems]);
+        },
+        body:""
+    })
+    .then((response)=>response.json())
+    .then((data)=>setCartItems(data));
+    }
+  },[])
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    if(localStorage.getItem('auth-token')){
+      fetch('http://localhost:4000/addtocart',{
+        method:'POST',
+        headers:{
+          Accept:'application/form-data',
+          'auth-token':`${localStorage.getItem('auth-token')}`,
+          'content-Type':'application/json',
+
+        },
+        body:JSON.stringify({"itemId":itemId})
+    })
+    .then((response)=>response.json())
+    .then((data)=>console.log(data));
+    }
   };
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: Math.max(prev[itemId] - 1, 0) }));
+   if(localStorage.getItem('auth-token')){
+      fetch('http://localhost:4000/removefromcart',{
+        method:'POST',
+        headers:{
+          Accept:'application/form-data',
+          'auth-token':`${localStorage.getItem('auth-token')}`,
+          'content-Type':'application/json',
+
+        },
+        body:JSON.stringify({"itemId":itemId})
+    })
+    .then((response)=>response.json())
+    .then((data)=>console.log(data));
+    }
   };
 
   const getTotalCartAmount = () => {
@@ -70,8 +89,7 @@ const ShopContextProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
-    getTotalCartItems,
-    fetchCartFromEmail, // ✅ exportable to CartItems.jsx
+    getTotalCartItems
   };
 
   return (

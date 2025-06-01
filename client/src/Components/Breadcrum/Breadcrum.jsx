@@ -1,10 +1,11 @@
 import React from "react";  
 import './Breadcrum.css';
-import arrow_icon from '../Assets/p1.jpg';
+//import arrow_icon from '../Assets/p1.jpg';
+import {FaChevronRight} from 'react-icons/fa';
 const Breadcrum = ({product}) => {
     return (
         <div className="breadcrum">
-            HOME <img src={arrow_icon} alt="" /> SHOP <img src={arrow_icon} alt="" /> {product.category} <img src={arrow_icon} alt="" /> {product.name}
+            HOME <FaChevronRight/> SHOP <FaChevronRight/> {product.category} <FaChevronRight/> {product.name}
         </div>
     );
 }

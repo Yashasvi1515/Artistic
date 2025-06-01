@@ -1,6 +1,6 @@
 .item {
-  width: 200px;
-  height: 300px;
+  width: 250px;
+  height: 400px;
   perspective: 1000px;
   margin: 50px auto;
 }
@@ -19,15 +19,24 @@
 
 .card-face {
   position: absolute;
-  backface-visibility: hidden;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f0f0;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.card-face.front {
+  background: #ffffff;
+  z-index: 2;
+}
+
+.card-face.front .front-content {
+  text-align: center;
+  padding: 10px;
 }
 
 .card-face.front img {
@@ -36,8 +45,27 @@
   border-radius: 12px;
 }
 
+.product-name {
+  margin: 10px 0 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.item-price-new {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+}
+
 .card-face.back {
+  background: #f0f0f0;
   transform: rotateY(180deg);
   flex-direction: column;
   text-align: center;
+}
+
+.product-name-back {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
 }

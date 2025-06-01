@@ -1,27 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import './CartItems.css';
-import remove_icon from '../Assets/p1.jpg';
+//import remove_icon from '../Assets/p1.jpg';
+import { FaTimes } from 'react-icons/fa'; 
 import { ShopContext } from "../../Context/ShopContext";
-import axios from "axios";
 
 const CartItems = () => {
- const { getTotalCartAmount, all_product, cartItems, removeFromCart, fetchCartFromEmail } = useContext(ShopContext);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
- useEffect(() => {
-  axios.get("http://localhost:4000/profile", { withCredentials: true })
-    .then(res => {
-      setIsAuthenticated(true);
-      const email = res.data.email;
-      fetchCartFromEmail(email);
-    })
-    .catch(() => setIsAuthenticated(false));
-}, [fetchCartFromEmail]);
-
-  if (!isAuthenticated) {
-    return <div><h2>Please log in with Google to view your cart.</h2></div>;
-  }
+ const { getTotalCartAmount, all_product, cartItems, removeFromCart } = useContext(ShopContext);
 
   return (
     <div className="cartitems">
@@ -43,7 +27,10 @@ const CartItems = () => {
               <p>{item.new_price}</p>
               <button className="cartitems-quantity">{cartItems[item.id]}</button>
               <p>{item.new_price * cartItems[item.id]}</p>
-              <img src={remove_icon} alt="" onClick={() => removeFromCart(item.id)} />
+             
+               <button className="close-btn" onClick={() => removeFromCart(item.id)}>
+      <FaTimes />
+    </button>
             </div>
             <hr />
           </div>

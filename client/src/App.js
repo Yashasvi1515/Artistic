@@ -11,6 +11,7 @@ import LoginSignup from './Pages/loginSignup';
 import Footer from './Components/Footer/Footer';
 import image1 from './Components/Assets/p1.jpg';
 
+
 function App() {
   return (
     <div >
@@ -28,6 +29,7 @@ function App() {
   </Route>
   
    <Route path="/cart" element={<Cart/>} />
+
    <Route path="/Login" element={<LoginSignup/>} />
 
   </Routes>
