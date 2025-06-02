@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import './Navbar.css';
 import p1 from '../Assets/p1.jpg';
 import logo from '../Assets/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
@@ -38,6 +40,10 @@ const Navbar = () => {
     <div className="nav-cart-count">
         {getTotalCartItems()}
     </div>
+     </div>
+     <div className="nav-login-wishlist">
+      <div className="wishlist-icon"> <Link to='/wishlist'><FontAwesomeIcon icon={faHeart} /></Link>
+      </div>
      </div>
        </div> 
      

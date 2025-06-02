@@ -1,0 +1,30 @@
+.wishlist-item img{
+    width: 200px;
+}
+.grids{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+.btn{
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #f0c040;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+.wishlist-item-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.wishlist-item {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+}

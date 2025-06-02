@@ -14,10 +14,10 @@ const Footer = () => {
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
               <div className="icon"><FaFacebookF /></div>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/kalakriti_iiti/" target="_blank" rel="noopener noreferrer">
               <div className="icon"><FaInstagram /></div>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/company/kalakriti-iit-indore" target="_blank" rel="noopener noreferrer">
               <div className="icon"><FaLinkedinIn /></div>
             </a>
           </div>

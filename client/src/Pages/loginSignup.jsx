@@ -25,6 +25,7 @@ const LoginSignup = () => {
     }).then((response)=>response.json()).then((data)=>responseData=data)
     if(responseData.success){
       localStorage.setItem('auth-token',responseData.token);
+      localStorage.setItem('userId', responseData.userId);
       window.location.replace("/");
     }
     else{
@@ -45,6 +46,7 @@ const LoginSignup = () => {
     }).then((response)=>response.json()).then((data)=>responseData=data)
     if(responseData.success){
       localStorage.setItem('auth-token',responseData.token);
+      localStorage.setItem('userId', responseData.userId);
       window.location.replace("/");
     }
     else{

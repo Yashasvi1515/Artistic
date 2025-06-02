@@ -13,7 +13,7 @@ const getDefaultCart = () => {
 const ShopContextProvider = ({ children }) => {
   const [all_product,setAll_Product]=useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
-
+const [wishlistItems, setWishlistItems] = useState([]);
   useEffect(()=>{
 fetch('http://localhost:4000/allproducts')
 .then((response)=>response.json())
@@ -34,6 +34,27 @@ if(localStorage.getItem('auth-token')){
     .then((data)=>setCartItems(data));
     }
   },[])
+  // Add this at the top
+
+// Fetch wishlist on mount if logged in
+useEffect(() => {
+  if (localStorage.getItem('auth-token')) {
+    fetch('http://localhost:4000/wishlist/get', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: localStorage.getItem('userId') })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.wishlist) {
+          setWishlistItems(data.wishlist.items);
+        }
+      });
+  }
+}, []);
+
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -82,6 +103,49 @@ if(localStorage.getItem('auth-token')){
     return Object.values(cartItems).reduce((a, b) => a + b, 0);
   };
 
+  const addToWishlist = (productId) => {
+  fetch('http://localhost:4000/wishlist/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: localStorage.getItem('userId'),
+      productId
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.wishlist) {
+        setWishlistItems(data.wishlist.items);
+      }
+    });
+};
+
+const removeFromWishlist = (productId) => {
+  fetch('http://localhost:4000/wishlist/remove', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: localStorage.getItem('userId'),
+      productId
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.wishlist) {
+        setWishlistItems(data.wishlist.items);
+      }
+    });
+};
+
+const isInWishlist = (productId) => {
+  return wishlistItems.some(item => item._id === productId || item === productId);
+};
+
+
   const contextValue = {
     all_product,
     cartItems,
@@ -89,7 +153,11 @@ if(localStorage.getItem('auth-token')){
     addToCart,
     removeFromCart,
     getTotalCartAmount,
-    getTotalCartItems
+    getTotalCartItems,
+     wishlistItems,
+  addToWishlist,
+  removeFromWishlist,
+  isInWishlist,
   };
 
   return (

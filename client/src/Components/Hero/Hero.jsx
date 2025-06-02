@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   // Adjust how fast the moon moves (lower = slower)
-  const moonTranslate = scrollY * 0.4; 
+ // const moonTranslate = scrollY * 0.4; 
   // Mountains move upward - negative translateY
   const mountainTranslate = -scrollY * 0.3;  // Adjust 0.3 to control speed
     return (

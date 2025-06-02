@@ -1,6 +1,6 @@
 .navbar{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 16px;
 }
@@ -65,4 +65,22 @@
     background: red;
     color: white;
 
+}
+.nav-login-wisnlist{
+    display: flex;
+    align-items: center;
+}
+.wishlist-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 30px;
+  color: #e63946;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.wishlist-icon:hover {
+  transform: scale(1.2);
+  color: #ff6b81;
 }

@@ -10,6 +10,7 @@ import Cart from './Pages/Cart';
 import LoginSignup from './Pages/loginSignup';
 import Footer from './Components/Footer/Footer';
 import image1 from './Components/Assets/p1.jpg';
+import Wishlist from './Pages/Wishlist';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   </Route>
   
    <Route path="/cart" element={<Cart/>} />
+   <Route path="/wishlist" element={<Wishlist/>} />
 
    <Route path="/Login" element={<LoginSignup/>} />
 

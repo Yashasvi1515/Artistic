@@ -14,6 +14,7 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import "./auth/googleOauth.js"; 
 import Product from "./Models/Product.js";
+import Wishlist from "./Models/Wishlist.js";
 
 
 app.use(express.json());
@@ -148,7 +149,7 @@ app.post('/signup',async (req,res)=>{
       }
     }
     const token=jwt.sign(data,'secret_ecom');
-    res.json({success:true,token});
+   res.json({ success: true, token, userId: user._id });
 });
 
 // creting endpoint for user login
@@ -163,7 +164,7 @@ if(user){
       }
     }
     const token=jwt.sign(data,'secret_ecom');
-    res.json({success:true,token});
+   res.json({ success: true, token, userId: user._id });
   }else{
     res.json({sucess:false,errors:"wrong Password"});
   }
@@ -242,6 +243,78 @@ app.post('/getcart',fetchUser,async(req,res)=>{
   let userData=await User.findOne({_id:req.user.id});
   res.json(userData.cartData);
 })
+
+app.post('/wishlist/add', async (req, res) => {
+  const { userId, productId } = req.body;
+  if (!userId || !productId) {
+    return res.status(400).json({ error: 'userId and productId are required' });
+  }
+  try {
+    let wishlist = await Wishlist.findOne({ userId });
+    if (!wishlist) {
+      wishlist = new Wishlist({
+        userId,
+        items: [productId]
+      });
+    } else {
+      if (wishlist.items.includes(productId)) {
+        return res.status(409).json({ message: 'Product already in wishlist' });
+      }
+      wishlist.items.push(productId);
+    }
+    await wishlist.save();
+    res.status(200).json({ message: 'Product added to wishlist', wishlist });
+  } catch (err) {
+    console.error('Error adding to wishlist:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/wishlist/remove', async (req, res) => {
+  const { userId, productId } = req.body;
+  if (!userId || !productId) {
+    return res.status(400).json({ error: 'userId and productId are required' });
+  }
+  try {
+    let wishlist = await Wishlist.findOne({ userId });
+    if (!wishlist) {
+      return res.status(404).json({ message: 'Wishlist not found for user' });
+    }
+    const index = wishlist.items.indexOf(productId);
+    if (index === -1) {
+      return res.status(404).json({ message: 'Product not found in wishlist' });
+    }
+    wishlist.items.splice(index, 1);
+    await wishlist.save();
+    res.status(200).json({ message: 'Product removed from wishlist', wishlist });
+  } catch (err) {
+    console.error('Error removing from wishlist:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/wishlist/get', async (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ error: 'userId is required' });
+  }
+
+  try {
+    const wishlist = await Wishlist.findOne({ userId }).populate('items');
+
+    if (!wishlist) {
+      return res.status(404).json({ message: 'Wishlist not found for user' });
+    }
+
+    res.status(200).json({ wishlist });
+  } catch (err) {
+    console.error('Error fetching wishlist:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
 
 //Start server
 app.listen(port, () => {
