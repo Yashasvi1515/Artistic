@@ -44,7 +44,7 @@ const ProductDisplay = ({product}) => {
       <FaStarHalfAlt />
       <FaRegStar />
     </div>
-                    <p>Reviews:122</p>
+                    
                 </div>
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-old">

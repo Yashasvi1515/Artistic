@@ -4,7 +4,7 @@ import './CSS/LoginSignup.css';
 const LoginSignup = () => {
    const [state,setState]=useState("Login");
    const [formData,setFormData]= useState({
-    username:"",
+    name:"",
     password:"",
     email:""
    })
@@ -61,7 +61,7 @@ const LoginSignup = () => {
             {state}
         </h1>
         <div className="loginsignup-fields">
-         {state==="Sign Up"?  <input type="text" name="username" value={formData.username} onChange={changeHandler} id="" placeholder="Your Name" />:<></>} 
+         {state==="Sign Up"?  <input type="text" name="name" value={formData.name} onChange={changeHandler} id="" placeholder="Your Name" />:<></>} 
             <input type="email" name="email" value={formData.email} onChange={changeHandler}  id="" placeholder="Your email" />
             <input type="password" name="password" value={formData.password} onChange={changeHandler} id="" placeholder="Password" />
         </div>

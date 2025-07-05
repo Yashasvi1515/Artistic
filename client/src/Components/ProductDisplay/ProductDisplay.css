@@ -22,7 +22,7 @@
 }
 
 .productdisplay-right-price-new {
-  color: #e60023; /* red/pink tone to indicate discounted price */
+  color: #e60023;
   font-size: 1.3rem;
   font-weight: bold;
 }
@@ -36,23 +36,23 @@
   padding-bottom: 20px;
 }
 .add-to-cart-btn {
-  background-color: #ff6f61;         /* A bold, attractive color */
-  color: white;                      /* White text for contrast */
-  padding: 10px 20px;                /* Comfortable padding */
-  border: none;                      /* Remove default border */
-  border-radius: 8px;                /* Rounded corners */
-  font-size: 1rem;                   /* Readable font size */
+  background-color: #ff6f61;        
+  color: white;                     
+  padding: 10px 20px;                
+  border: none;                   
+  border-radius: 8px;               
+  font-size: 1rem;                   
   font-weight: 600;
-  cursor: pointer;                   /* Pointer on hover */
+  cursor: pointer;                   
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
 }
 
 .add-to-cart-btn:hover {
-  background-color: rgba(3, 155, 3, 0.786);         /* Darker shade on hover */
-  transform: scale(1.03);            /* Slight zoom effect */
+  background-color: rgba(3, 155, 3, 0.786);        
+  transform: scale(1.03);            
 }
 
 .add-to-cart-btn:active {
-  transform: scale(0.98);            /* Pressed effect */
+  transform: scale(0.98);            
 }

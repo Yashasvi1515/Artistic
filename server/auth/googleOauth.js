@@ -9,7 +9,7 @@ dotenv.config();
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,       // From Google Developer Console
+      clientID: process.env.GOOGLE_CLIENT_ID,      
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
@@ -24,7 +24,7 @@ passport.use(
 
         const newUser = new User({
           email,
-          password: "google-oauth", // Placeholder or you can use null
+          password: "google-oauth", 
         });
 
         await newUser.save();
@@ -36,7 +36,7 @@ passport.use(
   )
 );
 
-// Required for sessions (optional)
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });

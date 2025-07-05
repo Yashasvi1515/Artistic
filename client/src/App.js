@@ -11,7 +11,7 @@ import LoginSignup from './Pages/loginSignup';
 import Footer from './Components/Footer/Footer';
 import image1 from './Components/Assets/p1.jpg';
 import Wishlist from './Pages/Wishlist';
-
+import SearchPage from './Pages/SearchPage';
 
 function App() {
   return (
@@ -24,11 +24,12 @@ function App() {
   <Route path="/charcoal"element={<ShopCategory bannner={image1} category="charcoal"/>} />
   <Route path="/digital" element={<ShopCategory bannner={image1} category="digital"/>} />
   <Route path="/handmade" element={<ShopCategory bannner={image1} category="handmade"/>} />
-
+  
   <Route path="/product" element={<Product/>}>
   <Route path=':productId' element={<Product/>} />
   </Route>
   
+  <Route path="/search" element={<SearchPage />} />
    <Route path="/cart" element={<Cart/>} />
    <Route path="/wishlist" element={<Wishlist/>} />
 

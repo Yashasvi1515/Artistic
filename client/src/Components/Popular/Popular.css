@@ -25,20 +25,20 @@
     flex-wrap: wrap;
 }
 .popular {
-  position: relative; /* So absolutely positioned children are relative to this */
-  overflow: hidden; /* Optional: hides any image part going further right than viewport */
+  position: relative; 
+  overflow: hidden; 
 }
 
 .ball-wrapper2 {
   position: absolute;
-  top: 50px;     /* Adjust as needed */   /* Push half of the image outside */
+  top: 50px;     
   left: 0px;
   z-index: 5;
-  pointer-events: none; /* optional: allows clicks through the image */
+  pointer-events: none; 
 }
 
 .ball-half-visible {
-  width: 200px;    /* Adjust based on how much you want visible */
+  width: 200px;    
   height: auto;
    transition: transform 0.1s linear;
 }

@@ -10,7 +10,6 @@ import path from 'path';
 import cors from 'cors';
 import nodemailer from "nodemailer";
 import bodyParser from "body-parser";
-//const { type } = require('os');
 import session from "express-session";
 import "./auth/googleOauth.js"; 
 import Product from "./Models/Product.js";
@@ -21,21 +20,21 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: "http://localhost:3000", // your React app URL
-  credentials: true,               // allow cookies to be sent
+  origin: "http://localhost:3000", 
+  credentials: true,               
 }));
 
 connectDB();
 
-// Root route
+
 app.get('/', (req, res) => {
     res.send('Express app is running');
 });
 
-// Sample protected route
+
 app.get("/profile", (req, res) => {
   if (!req.user) return res.status(401).send("Not logged in");
-  res.json({ email: req.user.email }); // return JSON
+  res.json({ email: req.user.email }); 
 });
 
 
@@ -61,7 +60,7 @@ app.post("/subscribe", async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail", // or use 'hotmail', 'yahoo', etc.
+      service: "gmail", 
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -84,7 +83,7 @@ app.post("/subscribe", async (req, res) => {
 });
 
 
-// For adding a product
+
 app.post("/addproduct",async (req,res)=>{
   let products =await Product.find({});
   let id;
@@ -110,21 +109,21 @@ app.post("/addproduct",async (req,res)=>{
     res.json({success:true,name:req.body.name});
 });
 
-// For deleting a product
+
 app.post('/removeproduct',async (req,res)=>{
  await Product.findOneAndDelete({id:req.body.id});
     console.log("Product deleted successfully");
     res.json({success:true,name:req.body.name});
 }
 );
-// Creating API for get all products
+
 app.get('/allproducts',async (req,res)=>{
   let products=await Product.find({});
   console.log("All products fetched successfully");
     res.json(products);
 });
 
-//Creating Endpoint for registering the user
+
 app.post('/signup',async (req,res)=>{
   let check=await User.findOne({email:req.body.email});
   if(check){
@@ -152,7 +151,7 @@ app.post('/signup',async (req,res)=>{
    res.json({ success: true, token, userId: user._id });
 });
 
-// creting endpoint for user login
+
 app.post('/login',async(req,res)=>{
 let user=await User.findOne({email:req.body.email});
 if(user){
@@ -174,7 +173,7 @@ else{
 }
 })
 
-//creating endpoint for new collection
+
 app.get('/newcollection',async(req,res)=>{
 let products=await Product.find({});
 let newcollection= products.slice(1).slice(-8);
@@ -182,7 +181,7 @@ console.log("new collection fetched");
 res.send(newcollection);
 })
 
-// Endpoint to get new collection in 'acrylic' category
+
 app.get('/newcollection/:category', async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
@@ -195,7 +194,7 @@ app.get('/newcollection/:category', async (req, res) => {
 });
 
 
-//creating endpoint for popular 
+
 app.get('/popular',async(req,res)=>{
 let products=await Product.find({category:"acrylic"});
 let popular= products.slice(0,4);
@@ -203,7 +202,7 @@ console.log("Popular fetched");
 res.send(popular);
 })
 
-//creating middleware to fetch user
+
 const fetchUser= async(req,res,next)=>{
   const token=req.header('auth-token');
   if(!token){
@@ -219,7 +218,7 @@ const fetchUser= async(req,res,next)=>{
   }
 }
 
-//creating endpoint for cartproducts 
+
 app.post('/addtocart',fetchUser,async(req,res)=>{
   console.log("Added",req.body.itemId);
  let userData=await User.findOne({_id:req.user.id});
@@ -227,7 +226,8 @@ app.post('/addtocart',fetchUser,async(req,res)=>{
  await User.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
  res.send("Added");
 })
-//creating endpoint for removing cartproducts 
+
+
 app.post('/removefromcart',fetchUser,async(req,res)=>{
  console.log("removed",req.body.itemId);
   let userData=await User.findOne({_id:req.user.id});
@@ -237,7 +237,7 @@ app.post('/removefromcart',fetchUser,async(req,res)=>{
  res.send("Removed");
 })
 
-//creating endpoint to get cart data
+
 app.post('/getcart',fetchUser,async(req,res)=>{
   console.log("getcart");
   let userData=await User.findOne({_id:req.user.id});
@@ -314,9 +314,74 @@ app.post('/wishlist/get', async (req, res) => {
   }
 });
 
+app.get('/products/search', async (req, res) => {
+  const { query } = req.query;
 
+  try {
+    const products = await Product.find({
+      name: { $regex: query, $options: 'i' },
+    });
 
-//Start server
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'No products found' });
+    }
+
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+});
+
+app.get('/products/:id/reviews', async (req, res) => {
+  try {
+    const product = await Product.findOne({ id: Number(req.params.id) }).select('reviews');
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    res.json(product.reviews);
+  } catch (err) {
+    console.error("Error fetching reviews:", err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/products/:id/reviews', fetchUser, async (req, res) => {
+  const { rating, comment } = req.body;
+  const productId = Number(req.params.id); 
+
+  if (!rating || !comment) {
+    return res.status(400).json({ error: 'Rating and comment are required' });
+  }
+
+  try {
+    
+    const product = await Product.findOne({ id: productId });
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(401).json({ error: 'Invalid user' });
+
+    const alreadyReviewed = product.reviews.find(
+      (rev) => rev.userId.toString() === req.user.id
+    );
+    if (alreadyReviewed) {
+      return res.status(400).json({ error: 'You have already reviewed this product' });
+    }
+    const newReview = {
+      userId: req.user.id,
+      username: user.name ,
+      rating,
+      comment,
+    };
+
+    product.reviews.push(newReview);
+    await product.save();
+
+    res.status(201).json({ message: 'Review added successfully' });
+  } catch (err) {
+    console.error('🚨 Server error while adding review:', err);
+    res.status(500).json({ error: 'Server error while adding review' });
+  }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

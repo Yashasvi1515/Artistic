@@ -34,9 +34,7 @@ if(localStorage.getItem('auth-token')){
     .then((data)=>setCartItems(data));
     }
   },[])
-  // Add this at the top
-
-// Fetch wishlist on mount if logged in
+  
 useEffect(() => {
   if (localStorage.getItem('auth-token')) {
     fetch('http://localhost:4000/wishlist/get', {

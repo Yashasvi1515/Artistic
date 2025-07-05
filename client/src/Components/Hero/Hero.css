@@ -25,7 +25,7 @@ section {
   left: 0;
   height: 100%;
   width: 100%;
-  object-fit: cover; /* Makes it fully responsive */
+  object-fit: cover; 
   z-index: 0;
 }
 
@@ -44,9 +44,9 @@ section {
 #front2 {
  position: absolute;
   right: 0;
-  bottom: 20px;
+  bottom: 50px;
   filter: brightness(70%);
-  width: 300px;
+  width: 400px;
   height: auto;
   max-height: 100%;
   z-index: 7;

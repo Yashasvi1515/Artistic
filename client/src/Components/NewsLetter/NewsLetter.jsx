@@ -10,7 +10,7 @@ const NewsLetter = () => {
     try {
       await axios.post("http://localhost:4000/subscribe", { email });
       alert("Thanks for subscribing! Please check your email.");
-      setEmail(""); // Clear input
+      setEmail(""); 
     } catch (error) {
       alert("Subscription failed. Try again.");
       console.error(error);

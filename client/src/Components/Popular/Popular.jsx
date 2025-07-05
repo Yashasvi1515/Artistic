@@ -20,9 +20,9 @@ const [scrollY, setScrollY] = useState(0);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
- // Scroll-based transformations
-  const xTranslate = Math.sin(scrollY * 0.01) * 50;  // Oscillating X movement
-  const yTranslate = Math.cos(scrollY * 0.01) * 20;  // Oscillating Y movement
+ 
+  const xTranslate = Math.sin(scrollY * 0.01) * 50;  
+  const yTranslate = Math.cos(scrollY * 0.01) * 20;  
   const rotation = scrollY * 0.5;
   return (
     <div className="popular">

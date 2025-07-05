@@ -10,7 +10,7 @@ const CartItems = () => {
   return (
     <div className="cartitems">
       <div className="cartitems-format-main">
-        <p>Products</p>
+        <p >Products</p>
         <p>Title</p>
         <p>Price</p>
         <p>Quantity</p>
@@ -38,9 +38,9 @@ const CartItems = () => {
       ))}
       <div className="cartItems-down">
         <div className="cartitems-total">
-          <h2>Cart Totals</h2>
+          <h2 style={{ paddingLeft: "20px"}}>Cart Totals</h2>
           <div className="cartitems-total-item">
-            <p>Subtotal</p>
+            <p >Subtotal</p>
             <p>${getTotalCartAmount()}</p>
           </div>
           <hr />

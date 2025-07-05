@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
+const reviewSchema = new Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  username: { type: String, required: true },
+  rating: { type: Number, required: true },
+  comment: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+
 const ProductSchema = new Schema({
     id:{
         type:Number,
@@ -32,7 +41,8 @@ const ProductSchema = new Schema({
     available:{
         type:Boolean,
         default:true
-    }
+    },
+     reviews: [reviewSchema]
 })
 
 export default mongoose.models.Product || mongoose.model("Product", ProductSchema);

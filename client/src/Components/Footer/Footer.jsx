@@ -37,8 +37,8 @@ const Footer = () => {
         <div className="footer-column">
           <ul className="footer-links">
             <li><a href="/popular">Popular</a></li>
-            <li><a href="/new">New Collection</a></li>
-            <li><a href="/acrylics">Acrylics</a></li>
+            <li><a href="/newcollection">New Collection</a></li>
+            <li><a href="/acrylic">Acrylics</a></li>
             <li><a href="/digital">Digital</a></li>
             <li><a href="/charcoal">Charcoal</a></li>
             <li><a href="/handmade">Handmade</a></li>

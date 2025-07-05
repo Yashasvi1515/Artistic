@@ -3,12 +3,12 @@ import Cart from "../Models/Cart.js";
 
 const router = express.Router();
 
-// Get cart for logged-in user
+
 router.get("/cart/:email", async (req, res) => {
   try {
     let cart = await Cart.findOne({ userEmail: req.params.email });
     if (!cart) {
-      // Create an empty cart document if none exists
+     
       cart = new Cart({ userEmail: req.params.email, items: {} });
       await cart.save();
     }
@@ -18,7 +18,7 @@ router.get("/cart/:email", async (req, res) => {
   }
 });
 
-//ave/update cart
+
 router.post("/", async (req, res) => {
   const { email, items } = req.body;
   if (!email) return res.status(400).json({ message: "Email required" });
