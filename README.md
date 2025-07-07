@@ -53,7 +53,7 @@ It provides a seamless platform for customers to browse, buy, review artworks, a
 - **Cart Page** — view & manage cart (authenticated users only)
 - **Wishlist Page** — view & manage wishlist (authenticated users only)
 - **Reviews** — authenticated users who purchased can leave reviews
-- **Admin Dashboard** — manage artworks, upload images with Multer
+- **Admin Dashboard** — manage artworks, upload images with Multer.
 
 ---
 
