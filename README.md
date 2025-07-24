@@ -1,11 +1,5 @@
 
 
-https://github.com/user-attachments/assets/33bfb364-ec73-4935-8312-92fb7acd294f
-
-
-
-https://github.com/user-attachments/assets/0b6a00af-702d-4b8c-b004-7045a0fae0b2
-
 # 🎨 Artistic
 
 **Artistic** is a full-stack web application developed for the Kalakriti Club to showcase and sell its artworks.  
@@ -65,6 +59,19 @@ It provides a seamless platform for customers to browse, buy, review artworks, a
 
 ---
 
+
+
+## 🎥 Demo Video
+
+#### Admin window
+https://github.com/user-attachments/assets/a3f07cb2-dc04-4570-bba1-2a6d90d005a9
+
+#### User window
+https://github.com/user-attachments/assets/1d48f45a-3483-491d-9063-e349086d672e
+
+
+
+
 ## 🚀 Getting Started
 
 ### Clone & Install
@@ -75,11 +82,7 @@ npm install
 cd client
 npm install
 npm start
-cd server
+cd ../server
 npm install
 node index.js
-
-### 🎥 Demo Video
-
-▶️ [Watch Demo Video]()
 
