@@ -1,5 +1,76 @@
-.add-product-thumnail{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+.add-product {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.addproduct-fields {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.addproduct-fields p {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.addproduct-fields input,
+.add-product-selector {
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.addproduct-fields input:focus,
+.add-product-selector:focus {
+  border-color: #007bff;
+}
+
+.add-product-selector {
+  cursor: pointer;
+}
+
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.add-product-thumnail {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.add-product-thumnail:hover {
+  transform: scale(1.05);
+}
+
+.addproductbutton {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.addproductbutton:hover {
+  background-color: #388e3c;
 }
